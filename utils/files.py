@@ -1,5 +1,6 @@
 import urllib.request, urllib.parse
 import os, sys, json, datetime
+import shutil
 from time import sleep
 from pathlib import Path
 
@@ -31,12 +32,7 @@ class Files:
         solution = os.path.realpath(f"{path}/solutions/day{day:02}.py")
         solution_path = Path(solution)
         if not solution_path.exists():
-            remote_file = "https://raw.githubusercontent.com/nitekat1124/aoc-tool/files/template-files/solutions/day_sample.py"
-            with urllib.request.urlopen(remote_file) as response:
-                remote_content = response.read().decode("utf-8")
-            with open(solution, "w+") as f:
-                f.write(remote_content)
-                print("Created file: " + solution)
+            shutil.copyfile(f"{path}/utils/template/sample.py", solution)
 
         folder = os.path.realpath(f"{path}/data/day{day:02}")
         folder_path = Path(folder)
@@ -52,8 +48,8 @@ class Files:
 
         input_path = Path(f"{folder}/{files[0]}")
         if input_path.stat().st_size == 0:
-            now = datetime.datetime.utcnow()
-            available_to_download = datetime.datetime(int(path.split(os.sep)[-1].split("-")[-1]), 12, day, 5, 0, 0)
+            now = datetime.datetime.now()
+            available_to_download = datetime.datetime.strptime(f"2024-12-{day:02}","%Y-%m-%d")
             if now < available_to_download:
                 print("Puzzle input not available to download until", available_to_download.strftime("%Y-%m-%d %H:%M:%S"), "UTC\n")
             while now < available_to_download:
@@ -85,7 +81,7 @@ class Files:
     def get_session():
         session = ""
         path = Files.get_path()
-        session_path = os.path.realpath(f"{path}/../aoc_session")
+        session_path = os.path.realpath(f"{path}/.config/aoc_session")
         with open(session_path, "r") as f:
             session = f.read().strip()
         return session
@@ -94,7 +90,7 @@ class Files:
     def get_headers():
         headers = {}
         path = Files.get_path()
-        headers_config_path = os.path.realpath(f"{path}/../aoc_headers.json")
+        headers_config_path = os.path.realpath(f"{path}/.config/aoc_headers.json")
         with open(headers_config_path, "r") as f:
             headers = json.loads(f.read().strip())
         return headers
