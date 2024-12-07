@@ -1,3 +1,17 @@
+"""
+--- Day 4: Ceres Search ---
+
+word search
+Part 1:
+This word search allows words to be horizontal, vertical, diagonal, written backwards, or even overlapping other words. 
+It's a little unusual, though, as you don't merely need to find one instance of XMAS - you need to find all of them.
+How many times does XMAS appear?
+
+Part 2:
+an X-MAS puzzle in which you're supposed to find two MAS in the shape of an X.
+How many times does an X-MAS appear?
+"""
+
 from utils.solution_base import SolutionBase
 
 
@@ -46,9 +60,7 @@ class Solution(SolutionBase):
             for c in range(1, cols - 1):
                 if data[r][c] == "A":
                     if {data[r - 1][c - 1], data[r + 1][c + 1]} == _set and {
-                        data[r - 1][c + 1],
-                        data[r + 1][c - 1],
-                    } == _set:
+                        data[r - 1][c + 1], data[r + 1][c - 1], } == _set:
                         count += 1
 
         return count
