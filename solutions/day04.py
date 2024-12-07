@@ -45,7 +45,10 @@ class Solution(SolutionBase):
         for r in range(1, rows - 1):
             for c in range(1, cols - 1):
                 if data[r][c] == "A":
-                    if {data[r - 1][c - 1], data[r + 1][c + 1]} == _set and {data[r - 1][c + 1], data[r + 1][c - 1]} == _set:
+                    if {data[r - 1][c - 1], data[r + 1][c + 1]} == _set and {
+                        data[r - 1][c + 1],
+                        data[r + 1][c - 1],
+                    } == _set:
                         count += 1
 
         return count

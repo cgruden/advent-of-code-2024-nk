@@ -23,7 +23,6 @@ that number appears in the right list.
 
 """
 
-
 from utils.solution_base import SolutionBase
 
 

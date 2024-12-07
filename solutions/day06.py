@@ -53,7 +53,9 @@ class Solution(SolutionBase):
         _map = [list(line) for line in data]
         is_leaving, visited, visited_entry = self.patrol(_map)
 
-        visited.remove(self.get_guard_pos(_map))  # avoid the guard position, you can not put obstruction there
+        visited.remove(
+            self.get_guard_pos(_map)
+        )  # avoid the guard position, you can not put obstruction there
         loop_count = 0
 
         _map_dump = json.dumps(_map)  # json dumps/loads faster than deepcopy
@@ -67,7 +69,9 @@ class Solution(SolutionBase):
             pos = visited_entry[(vi, vj)][0]
             idx = visited_entry[(vi, vj)][1]
 
-            is_leaving_copy, visited_copy, visited_entry_copy = self.patrol(_map_copy, pos, idx)
+            is_leaving_copy, visited_copy, visited_entry_copy = self.patrol(
+                _map_copy, pos, idx
+            )
             if not is_leaving_copy:  # not leaving, because of the loop
                 loop_count += 1
 

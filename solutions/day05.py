@@ -29,7 +29,9 @@ class Solution(SolutionBase):
 
         # ordered_items = sorted(filtered_rules.items(), key=lambda x: len(x[1]), reverse=True)
         # ordered_keys = [i[0] for i in ordered_items]
-        ordered_keys = sorted(filtered_rules, key=lambda k: len(filtered_rules[k]), reverse=True)
+        ordered_keys = sorted(
+            filtered_rules, key=lambda k: len(filtered_rules[k]), reverse=True
+        )
 
         return ordered_keys
 
